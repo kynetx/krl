@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+
+require "rubygems"
+require "sinatra/base"
+require "yaml"
+require "kynetx_am_api"
+
+CONFIG_FILE = ENV["HOME"] + "/.krl/credentials.yml"
+class KRLConnect < Sinatra::Base
+  set :environment, :production
+  set :sessions, :false
+  set :logging, :false
+  set :port, 3009
+  set :views, Proc.new { File.join(File.dirname(__FILE__), "views") }
+
+  
+
+  puts "#{"\n"*10}Go to the following url to authorize. Press ctrl+c when finished.\n http://localhost:3009#{"\n"*10}"
+
+  get '/authorize' do
+    rt = YAML::load_file(CONFIG_FILE)
+    api = setup_api(rt.merge({:oauth_verifier => params[:oauth_verifier]}))
+    @oauth_user = api.get_user_info
+    File.open(CONFIG_FILE, "w") {|f| f.print @oauth_user.to_h.to_yaml}
+    erb :success
+  end
+
+  get '/' do
+    FileUtils.mkdir_p ENV["HOME"] + "/.krl" unless File.exist?(CONFIG_FILE)
+    rt = get_request_token
+    config = {}
+    config[:request_token] = rt[:request_token]
+    config[:request_secret] = rt[:request_secret]
+    File.open(CONFIG_FILE, "w") {|f| f.print config.to_yaml}
+
+    @auth_url = rt[:url]
+
+    erb :index
+  end
+
+
+
+  def get_request_token
+    api = setup_api
+    rt = api.get_request_token
+    return {:request_token => rt.token, :request_secret => rt.secret, :url => api.get_authorize_url}
+  end
+
+  def setup_api(opts={})
+    KynetxAmApi::Oauth.api_server_url = "http://amapi.kynetx.com"
+    KynetxAmApi::Oauth.accounts_server_url = "https://accounts.kynetx.com"
+    KynetxAmApi::Oauth.consumer_key = "1j54YDLUcLW9ERBKalNm"
+    KynetxAmApi::Oauth.consumer_secret = "QiWCbvTpCAejoceV3f6dD8ycifEkSumFAW1VSmwC"
+    return KynetxAmApi::DirectApi.new(opts)
+  end
+end
+
+KRLConnect.run!

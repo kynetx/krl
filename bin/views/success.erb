@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Success</title>
+	
+</head>
+
+<body>
+	Welcome, <%= @oauth_user.name %><br>
+	
+	A file called <code><%= CONFIG_FILE %></code> was created that holds your credentials. You will now be able to do the following:
+	
+	<br><br>
+	
+	<strong>View your apps:</strong><br> 
+	<code>krl apps</code><br>
+	<br>
+	<strong>Check out an app:</strong><br>
+	<code>krl checkout &lt;app id&gt;</code><br>
+	<br>
+	<strong>View all options</strong><br>
+	<code>krl help</code><br>
+	<br><br>
+	Have Fun!
+	
+
+</body>
+</html>

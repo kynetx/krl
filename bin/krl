@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+
+LIB_DIR = File.dirname(__FILE__) + "/../lib/"
+
+COMMANDS = {
+  "help" => lambda { |args| require LIB_DIR + 'help'; KRL_CMD::Help.go },
+  "apps" => lambda { |args| require LIB_DIR + 'apps'; KRL_CMD::Apps.go },
+  "checkout" => lambda { |args| require LIB_DIR + 'checkout'; KRL_CMD::Checkout.go(args) },
+  "create" => lambda { |args| require LIB_DIR + 'create'; KRL_CMD::Create.go(args) },
+  "update" => lambda { |args| require LIB_DIR + 'update'; KRL_CMD::Update.go(args) },
+  "versions" => lambda { |args| require LIB_DIR + 'versions'; KRL_CMD::Versions.go(args) },
+  "deploy" => lambda { |args| require LIB_DIR + 'deploy'; KRL_CMD::Deploy.go(args) },
+  "commit" => lambda { |args| require LIB_DIR + 'commit'; KRL_CMD::Commit.go },
+  "show" => lambda { |args| require LIB_DIR + 'show'; KRL_CMD::Show.go(args) },
+  "note" => lambda { |args| require LIB_DIR + 'note'; KRL_CMD::Note.go(args) },
+  "check" => lambda { |args| require LIB_DIR + 'check'; KRL_CMD::Check.go },
+  "generate" => lambda { |args| require LIB_DIR + 'generate'; KRL_CMD::Generate.go(args) },
+  "test" => lambda { |args| require LIB_DIR + 'test'; KRL_CMD::Test.go(args) }
+}
+
+banner = "Usage: krl <command> <args>\nUse 'krl help' for more information."
+
+cmd = ARGV.shift
+if COMMANDS.keys.include? cmd
+  begin
+    COMMANDS[cmd].call(ARGV)
+  rescue Exception => e
+    puts "Error: #{e.message}\n#{e.backtrace.join("\n")}"
+  end
+else
+  puts banner
+end
