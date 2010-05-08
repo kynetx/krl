@@ -4,7 +4,7 @@
 *NOTE:* Right now, this gem requires ruby 1.8.7 to run. We are working on testing it on ruby 1.9.1 and will update the gem when it's ready. 
 
 === OS X
-Ruby is installed by default on Leopard and Snow Leopard (10.5, 10.6).  You will, however, need to install the XCode in order to use the KRL gem. They can be found on your OS X install DVDs or from here: http://developer.apple.com/technologies/xcode.html
+Ruby is installed by default on Leopard and Snow Leopard (10.5, 10.6).  You will, however, need to install XCode in order to use the KRL gem. XCode can be found on your OS X install DVDs or from here: http://developer.apple.com/technologies/xcode.html
 
 
 === Linux
