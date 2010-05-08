@@ -28,7 +28,7 @@ module KRL_CMD
       puts " ".ljust(20) +        "If no version is specified, then the latest version will be used."
       puts " ".ljust(20) +        "Example: krl update"
       puts " ".ljust(20) +        "or: krl update 10"
-      puts "commit".ljust(20) +   "Saves your .krl file as the latest version. "
+      puts "commit".ljust(20) +   "Uploads your .krl file as the latest version. "
       puts " ".ljust(20) +        "Example: krl commit"
       puts "deploy".ljust(20) +   "Deploys a version of your application. If no version is"
       puts " ".ljust(20) +        "specified then the latest version is deployed."

@@ -2,14 +2,14 @@ require 'rake'
 
 Gem::Specification.new do |s|
   s.name = %q{krl}
-  s.version = "0.1.5"
+  s.version = "0.1.51"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Farmer, Cid Dennis"]
   s.date = %q{2010-05-04}
   s.email = %q{mjf@kynetx.com}
   s.extra_rdoc_files = ["LICENSE"]
-  s.homepage = %q{http://www.kynetx.com}
+  s.homepage = %q{http://code.kynetx.com}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.bindir = 'bin'
@@ -19,9 +19,8 @@ Gem::Specification.new do |s|
   s.summary = %q{Provides terminal access to the Kynetx Applicaiton API}
 
   s.description = <<-EOF
-    Installing this gem will give you command line tools that will allow you
-    to develop your Kynetx applications using any IDE you desire. It provides 
-    a simple interface that is similar to git or svn.
+    Build your Kynetx applications with the IDE of your choice! Installing the krl gem will give you 
+    command line tools that provides a simple interface that is similar to git or svn.
   EOF
 
   s.files = FileList['lib/**/*.rb', 'bin/**/**', "LICENSE"].to_a
