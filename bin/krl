@@ -16,7 +16,8 @@ COMMANDS = {
   "note" => lambda { |args| require LIB_DIR + 'note'; KRL_CMD::Note.go(args) },
   "check" => lambda { |args| require LIB_DIR + 'check'; KRL_CMD::Check.go },
   "generate" => lambda { |args| require LIB_DIR + 'generate'; KRL_CMD::Generate.go(args) },
-  "test" => lambda { |args| require LIB_DIR + 'test'; KRL_CMD::Test.go(args) }
+  "test" => lambda { |args| require LIB_DIR + 'test'; KRL_CMD::Test.go(args) },
+  "app_info" => lambda { |args| require LIB_DIR + 'app_info'; KRL_CMD::AppInfo.go(args) }
 }
 
 banner = "Usage: krl <command> <args>\nUse 'krl help' for more information."

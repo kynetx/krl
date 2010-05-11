@@ -117,5 +117,8 @@ Which will give you this output:
 	                    bookmarklet runtime(optional)
 	                    infocard name datasets(optional)
 	check               Performs a syntax check of your .krl file.
+	app_info            Reports detailed version and application information.
+	                    Example: krl app_info <applicationid>
+
 
 
