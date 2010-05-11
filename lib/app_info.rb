@@ -5,6 +5,13 @@ module KRL_CMD
       require LIB_DIR + 'common'
       require 'pp'
       user = User.new
+      app_id = nil
+      if(args.length > 0)
+        app_id = args[0]
+      else
+        app_id = KRL_COMMON::get_app().application_id
+      end
+
       app_info = user.api.get_app_info(args[0])
       app_details = user.api.get_app_details(args[0])
 #     pp app_details
