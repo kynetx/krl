@@ -65,6 +65,10 @@ module KRL_CMD
       puts " ".ljust(20) +        "bookmarklet runtime(optional)"
       puts " ".ljust(20) +        "infocard name datasets(optional)"
       puts "check".ljust(20) +    "Performs a syntax check of your .krl file."
+      puts " ".ljust(20) +        "The location of the parser can also be added"
+      puts " ".ljust(20) +        "as an optional argument."
+      puts " ".ljust(20) +        "Example: krl check"
+      puts " ".ljust(20) +        "or: krl check http://0.0.0.0/manage/parse/ruleset"
       puts
     end
   end
