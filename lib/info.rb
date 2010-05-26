@@ -28,29 +28,19 @@ module KRL_CMD
 
       puts "Production Version"
       if(app_info["production"])
-        puts "Current Production version is #{app_info["production"]["version"]} IE Guid : #{app_details["guid"]}"
+        puts "Current production version is #{app_info["production"]["version"]} IE Guid : #{app_details["guid"]}"
       else
-        puts "No Production version"
+        puts "No production version."
       end
       puts ""
       puts ""
 
       puts "Development Version"
       if(app_info["development"])
-        puts "Current Production version is #{app_info["development"]["version"]} IE Guid : #{app_details["guid"]}"
+        puts "Current development version is #{app_info["development"]["version"]} IE Guid : #{app_details["guid"]}"
       else
-        puts "No Production version"
+        puts "No development version."
       end
-      puts ""
-      puts ""
-
-      KRL_COMMON::pretty_table(app_info["versions"], [
-        {:field => "Login", :value => lambda { |r| r["login"] }},
-        {:field => "Name", :value => lambda { |r| r["name"] }},
-        {:field => "Created", :value => lambda { |r| r["created"].to_s }},
-        {:field => "Version", :value => lambda { |r| r["version"] }},
-        {:field => "Note", :value => lambda { |r| r["note"] }}
-      ])
     end
   end
 end
