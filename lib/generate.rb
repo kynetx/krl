@@ -38,7 +38,7 @@ module KRL_CMD
       File.open(bm_file, 'w') do |f|
         f.print("<textarea rows='5' cols='100'>#{bm}</textarea><br><br>")
         link = env == "prod" ? app.name : env + "_" + app.name
-        f.print("<a href='#{bm}'>#{link}</a>")
+        f.print("<a href=\"#{bm.gsub('"', '&quot;')}\">#{link}</a>")
       end
       puts "BOOKMARKLET:"
       puts bm
