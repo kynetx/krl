@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'rubygems'
-# $DEBUG = true
+#$DEBUG = true
 LIB_DIR = File.dirname(__FILE__) + "/../lib/"
 
 COMMANDS = {

@@ -6,7 +6,7 @@ module KRL_CMD
       app = KRL_COMMON::get_app
       krl_file = File.join(Dir.pwd, app.application_id + ".krl")
       raise "Cannot find .krl file." unless File.exists?(krl_file)
-      if args.to_s != ""
+      if args.to_s == ""
         apiurl = "http://krl.kobj.net/manage/parse/ruleset"
       else
         apiurl = args.to_s
