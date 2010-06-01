@@ -5,6 +5,9 @@ require "sinatra/base"
 require "yaml"
 require "kynetx_am_api"
 
+#TODO: add launchy gem to make the browser automatically popup.
+#TODO: make it so you can connect without a web page
+
 CONFIG_FILE = ENV["HOME"] + "/.krl/credentials.yml"
 class KRLConnect < Sinatra::Base
   set :environment, :production

@@ -4,6 +4,10 @@ require 'fileutils'
 module KRL_CMD
   class Checkout
     def self.go(args)
+			require LIB_DIR + 'common'
+      app = KRL_COMMON::get_app rescue nil
+			raise "You are already in an application: #{app.application_id}" if app
+
       ruleset_id = args.to_s
       puts "Checking out: #{ruleset_id}"
       raise "Please specify a ruleset id." if ruleset_id.empty?
