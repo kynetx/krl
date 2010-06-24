@@ -56,6 +56,9 @@ From a command line type:
 
 Windows users can leave off the "sudo"
 
+NOTE: Windows users will need to install a fixed version of the launchy gem in order to have their browser automatically open when a bookmarklet is generated or when krl-connect is run.  You can download the gem from http://github.com/downloads/kynetx/krl/launchy-0.3.5.gem 
+Once downloaded, run the following command:
+  gem install launchy-0.3.5.gem 
 
 == Authenticating
 From a command line type:

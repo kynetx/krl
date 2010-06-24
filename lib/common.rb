@@ -24,7 +24,9 @@ module KRL_COMMON
     begin
       root_dir = Dir.pwd
       raise "Please re-checkout your app or make sure you are in the root directory of an app." unless File.exists?(File.join(root_dir, ".app"))
-      config = YAML::load_file(File.join(root_dir, '.app'))
+      config_file = File.join(root_dir, '.app')
+      raise "Unable to get the app information. You need to recheckout your app." unless File.exists?(config_file)
+      config = YAML::load_file(config_file)
       user = KRL_CMD::User.new
       app = user.find_application(:application_id => config[:ruleset_id], :version => version)
       return app

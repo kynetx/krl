@@ -15,6 +15,7 @@ module KRL_CMD
       validateresponse = Net::HTTP.post_form(URI.parse(apiurl), apiargs).body.to_s
       jdata = JSON.parse(validateresponse, { :max_nesting => false })
       if jdata["error"]
+        puts "Errors:"
         puts jdata["error"]
       else
         puts "OK"
