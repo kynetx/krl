@@ -51,6 +51,7 @@ module KRL_CMD
       puts "show".ljust(20) +     "Shows a specific version of the app."
       puts " ".ljust(20) +        "Example: krl show 10"
       puts "generate".ljust(20) + "Generates an endpoint and places it in the endpoints directory."
+      puts " ".ljust(20) +        "Name, author, and description are optional and default to the user and app settings."
       puts " ".ljust(20) +        "Example: krl generate firefox"
       puts " ".ljust(20) +        "Available endpoints: "
       puts " ".ljust(20) +        "firefox name author description"
