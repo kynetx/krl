@@ -5,7 +5,7 @@ module KRL_CMD
       limit = args.to_s.to_i
       app = KRL_COMMON::get_app
       p_version = app.production_version.to_i
-      KRL_COMMON::pretty_table(app.versions, [
+      KRL_COMMON::pretty_table(app.versions.reverse, [
         {:field => "Version", :value => lambda { |r| r["version"] }},
         {:field => "User", :value => lambda { |r| r["name"] }},
         {:field => "Date", :value => lambda { |r| r["created"].to_s }},
