@@ -12,7 +12,7 @@ module KRL_CMD
         apiurl = args.to_s
       end
       apiargs = { "krl" => File.open(krl_file, 'r') { |f| f.read } }
-      validateresponse = Net::HTTP.post_form(URI.parse(apiurl), apiargs).body.to_s
+      validateresponse = KRL_COMMON::long_post_form(URI.parse(apiurl), apiargs).body.to_s
       jdata = JSON.parse(validateresponse, { :max_nesting => false })
       if jdata["error"]
         puts "Errors:"
@@ -21,5 +21,6 @@ module KRL_CMD
         puts "OK"
       end
     end
+
   end
 end

@@ -1,4 +1,6 @@
 require 'terminal-table/import'
+require 'net/http'
+
 module KRL_COMMON
   def self.pretty_table(collection, fields, limit=0)
     ptable = table do |t|
@@ -35,5 +37,16 @@ module KRL_COMMON
     end
 
   end
+
+  def self.long_post_form(url, params)
+    req = Net::HTTP::Post.new(url.path)
+    req.form_data = params
+    req.basic_auth url.user, url.password if url.user
+    Net::HTTP.new(url.host, url.port).start {|http|
+      http.read_timeout = 120
+      http.request(req)
+    }
+  end
+
   
 end
