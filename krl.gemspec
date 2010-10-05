@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Farmer, Cid Dennis"]
-  s.date = %q{2010-09-10}
+  s.date = %q{2010-10-05}
   s.email = %q{mjf@kynetx.com}
   s.extra_rdoc_files = ["LICENSE"]
   s.homepage = %q{http://github.com/kynetx/krl}
@@ -30,20 +30,20 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<kynetx_am_api>, [">= 0.1.28"])
+      s.add_runtime_dependency(%q<kynetx_am_api>, [">= 0.1.29"])
       s.add_runtime_dependency(%q<terminal-table>, [">= 0"])
       s.add_runtime_dependency(%q<sinatra>, [">= 1.0"])
       s.add_runtime_dependency(%q<launchy>, [">= 0.3.7"])
       s.add_development_dependency('rspec')
     else
-      s.add_dependency(%q<kynetx_am_api>, [">= 0.1.28"])
+      s.add_dependency(%q<kynetx_am_api>, [">= 0.1.29"])
       s.add_dependency(%q<terminal-table>, [">= 0"])
       s.add_dependency(%q<sinatra>, [">= 1.0"])
       s.add_dependency(%q<launchy>, [">= 0.3.7"])
       s.add_development_dependency('rspec')
     end
   else
-    s.add_dependency(%q<kynetx_am_api>, [">= 0.1.28"])
+    s.add_dependency(%q<kynetx_am_api>, [">= 0.1.29"])
     s.add_dependency(%q<terminal-table>, [">= 0"])
     s.add_dependency(%q<sinatra>, [">= 1.0"])
     s.add_dependency(%q<launchy>, [">= 0.3.7"])
