@@ -8,6 +8,7 @@ module KRL_CMD
         begin
           app.krl = File.open(krl_file, 'r') { |f| f.read }
 	  			app.set_version_note(app.version, args.to_s) if args.to_s != ""
+          puts "Committed version #{app.version}"
         rescue KRLParseError => e
           puts "Unable to parse your krl."
           puts "Errors:"
@@ -16,7 +17,6 @@ module KRL_CMD
       else
         raise "Unable to find file: #{krl_file}"
       end
-      puts "Committed version #{app.version}"
     end
   end
 end
