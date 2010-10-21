@@ -128,4 +128,7 @@ Which will give you this output:
                       as an optional argument.
                       Example: krl check
                       or: krl check http://0.0.0.0/manage/parse/ruleset
-  
+ ========= Optional Growl Functionality ========= 
+    To get the optional growl notify functionality, you will need to have the growl gem for ruby installed. If you do not, enter this at the command prompt:
+        sudo gem install growl
+Followed by your password. 
