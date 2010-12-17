@@ -2,9 +2,7 @@
 source "http://rubygems.org"
 
 gem "terminal-table"
-path "/Users/mikefarmer/Dropbox/Kynetx/oss/am_api_gem" do
-  gem "kynetx_am_api"
-end
+gem "kynetx_am_api"
 gem "sinatra"
 gem "launchy"
 gem "awesome_print"
