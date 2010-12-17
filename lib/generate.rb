@@ -7,48 +7,68 @@ require 'launchy'
 
 module KRL_CMD
   class Generate
-    def self.go(args)
-      raise "Please specify an endpoint to generate" if args.to_s.empty?   
-      type = args.shift
+    include Thor::Shell
+    def self.go(endpoint, options)
+      g = self.new(endpoint,options)
+    end
+      
+    def initialize(endpoint, options)
+      @shell = Basic.new
+      @endpoint = endpoint
+      @environment = options["environment"]
+      @use_defaults = options["defaults"]
+      @force = options["force"]
+      @app = KRL_COMMON::get_app  
+      @user = KRL_CMD::User.new
       endpoints = {
-        "firefox" => lambda {gen_extension(type, args)},
-        "chrome" => lambda {gen_extension(type, args)},
-        "ie" => lambda {gen_extension(type, args)},
-        "bookmarklet" => lambda {gen_bookmarklet(args)},
-        "infocard" => lambda {gen_infocard(args)}
+        "firefox" => lambda {gen_extension},
+        "chrome" => lambda {gen_extension},
+        "ie" => lambda {gen_extension},
+        "bookmarklet" => lambda {gen_bookmarklet},
+        "infocard" => lambda {gen_infocard}
       }
-      if endpoints[type]
-        endpoints[type].call
+      if endpoints[@endpoint]
+        endpoints[@endpoint].call
       else
-        raise "Unknown endpoint specified (#{type})"
+        raise "Unknown endpoint specified (#{@endpoint})"
       end
+
       
     end
     
-    def self.gen_extension(type, args, env='prod')
-      puts "Generating Extension (#{type.to_s}) #{args.join(', ')}"
-      # ext = app.extension(type, args[0] || "", args[1] || "", args[2] || "" )
-      # write_file(ext, "prod")   
+    def gen_extension
+      puts "Generating Extension (#{@endpoint} - #{@environment})"
+
+      if @use_defaults
+        extname, extauthor, extdesc = "", "", ""
+      else
+        extname = @shell.ask("Name of the extension (#{@app.name}):")
+        extauthor = @shell.ask("Name of the author (#{@user.name}):")
+        extdesc = @shell.ask("Description:")
+      end
      
       opts = {}
-      opts[:extname] = args[0] if args[0]
-      opts[:extauthor] = args[1] if args[1]
-      opts[:extdesc] = args[2] if args[2]
-      opts[:env] = env
+      opts[:extname] = extname unless extname.empty? 
+      opts[:extauthor] = extauthor unless extauthor.empty? 
+      opts[:extdesc] = extdesc unless extdesc.empty?
+      opts[:env] = @environment
+      opts[:force_build] = @force ? "Y" : "N"
       opts[:format] = 'url'
 
-      ext = app.endpoint(type, opts)
-      write_file(ext, env)      
+      ext = @app.endpoint(@endpoint, opts)
+      write_file(ext)      
     end
     
-    def self.gen_bookmarklet(args, env="prod")
-      puts "Generating Bookmarklet (#{env})"
+    def gen_bookmarklet
+      puts "Generating Bookmarklet (#{@environment})"
       bm = ""
       opts = {}
-      opts[:env] = env
-      opts[:runtime] = args.to_s unless args.to_s.empty?
+      opts[:env] = @environment
+      if ! @use_defaults
+        opts[:runtime] = @shell.ask("Runtime to use for the bookmarklet (blank for default):")
+      end
 
-      endpoint = app.endpoint(:bookmarklet, opts)
+      endpoint = @app.endpoint(:bookmarklet, opts)
       
       if endpoint["errors"].empty?
         bm = endpoint["data"]
@@ -56,10 +76,10 @@ module KRL_CMD
         raise "Invalid bookmark generated. \n#{endpoint.errors.join("\n")}"
       end
       
-      bm_file = File.join(get_endpoint_dir(env), env + "_bookmarklet.html")
+      bm_file = File.join(get_endpoint_dir, @environment + "_bookmarklet.html")
       File.open(bm_file, 'w') do |f|
         f.print("<textarea rows='5' cols='100'>#{bm}</textarea><br><br>")
-        link = env == "prod" ? app.name : env + "_" + app.name
+        link = @environment == "prod" ? @app.name : @environment + "_" + @app.name
         f.print("<a href=\"#{bm.gsub('"', '&quot;')}\">#{link}</a>")
       end
       puts "BOOKMARKLET:"
@@ -69,36 +89,40 @@ module KRL_CMD
       Launchy::Browser.run('file://' + bm_file)
     end
     
-    def self.gen_infocard(args, env="prod")
-      raise "You must specify a name for the card" if args.empty?
-      puts "Generating Infocard (#{env})"
+    def gen_infocard
+      puts "Generating Infocard (#{@environment})"
+
+      if @use_defaults
+        extname = ""
+        datasets = ""
+      else
+        extname = @shell.ask("Name of the infocard (#{@app.name}):")
+        datasets = @shell.ask("Datasets:")
+      end
+
       opts = {}
-      opts[:extname] = args[0] if args[0]
-      opts[:datasets] = args[1] if args[1]
-      opts[:env] = env
+      opts[:extname] = extname unless extname.empty?
+      opts[:datasets] = datasets unless datasets.empty?
+      opts[:env] = @environment
       opts[:format] = 'url'
 
-      icard = app.endpoint(:info_card, opts)
-      write_file(icard, env)
+      icard = @app.endpoint(:info_card, opts)
+      write_file(icard)
     end
     
-    def self.app
-      return @@app if defined?@@app
-      require LIB_DIR + 'common'
-      @@app = KRL_COMMON::get_app 
-      return @@app
-    end
-    
-    def self.get_endpoint_dir(env)
-      dir_name = env == "prod" ? "/endpoints" : "/test"
+    private
+
+    def get_endpoint_dir
+      dir_name = @environment == "prod" ? "/endpoints" : "/test"
       endpoint_dir = Dir.pwd + dir_name
       FileUtils.mkdir(endpoint_dir) unless File.directory?(endpoint_dir)
       return endpoint_dir
     end
     
-    def self.write_file(ext, env)
+    
+    def write_file(ext)
       if ext["errors"].empty?
-        endpoint_dir = get_endpoint_dir(env)
+        endpoint_dir = get_endpoint_dir
         ext_file_name = File.join(endpoint_dir, ext["file_name"])
         url = URI.parse(ext["data"])
 

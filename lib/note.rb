@@ -1,11 +1,9 @@
 module KRL_CMD
   class Note
-    def self.go(args)
-      raise "Please supply a version and a note. (note must be enclosed in quotes)" unless args.length == 2
-      version = args.first.to_i
-      note = args.last.to_s
-      require LIB_DIR + 'common'
+    def self.go(options)
       app = KRL_COMMON::get_app
+      version = options["version"] ? options["version"] : app.version
+      note = options["note"]
       app.set_version_note(version, note)
       puts "Done."      
     end

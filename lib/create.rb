@@ -1,14 +1,14 @@
 module KRL_CMD
   class Create
-    def self.go(args)
-      raise "An application name must be specified" if args.to_s.empty?
-      name = args.first
-      desc = args.last # if description wasn't specified, set it to the name
-      require LIB_DIR + 'user'
-      require LIB_DIR + 'checkout'      
+    def self.go(name, options)
+      desc = options["description"] ? options["description"] : name
       user = KRL_CMD::User.new
       new_app = user.create_application(name, desc)
-      KRL_CMD::Checkout.go(new_app.application_id)
+      checkout_opts = {
+        "ruleset" => new_app.application_id,
+        "title" => options["title"]
+      }
+      KRL_CMD::Checkout.go(checkout_opts)
       
     end
   end

@@ -1,0 +1,60 @@
+PATH
+  remote: /Users/mikefarmer/Dropbox/Kynetx/oss/am_api_gem
+  specs:
+    kynetx_am_api (0.1.29)
+      json
+      multipart-post
+      oauth
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    awesome_print (0.3.1)
+    configuration (1.2.0)
+    diff-lcs (1.1.2)
+    growl (1.0.3)
+    guard (0.2.2)
+      open_gem (~> 1.4.2)
+      thor (~> 0.14.3)
+    guard-rspec (0.1.9)
+      guard (>= 0.2.2)
+    json (1.4.6)
+    launchy (0.3.7)
+      configuration (>= 0.0.5)
+      rake (>= 0.8.1)
+    multipart-post (1.0.1)
+    oauth (0.4.4)
+    open_gem (1.4.2)
+      launchy (~> 0.3.5)
+    rack (1.2.1)
+    rake (0.8.7)
+    rb-fsevent (0.3.9)
+    rspec (2.3.0)
+      rspec-core (~> 2.3.0)
+      rspec-expectations (~> 2.3.0)
+      rspec-mocks (~> 2.3.0)
+    rspec-core (2.3.0)
+    rspec-expectations (2.3.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.3.0)
+    sinatra (1.1.0)
+      rack (~> 1.1)
+      tilt (~> 1.1)
+    terminal-table (1.4.2)
+    thor (0.14.6)
+    tilt (1.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  awesome_print
+  growl
+  guard-rspec
+  kynetx_am_api!
+  launchy
+  rb-fsevent
+  rspec (>= 2.0.0)
+  sinatra
+  terminal-table
+  thor

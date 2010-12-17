@@ -1,17 +1,14 @@
 module KRL_CMD
   class Info
-    def self.go(args)
-      require LIB_DIR + 'user'
-      require LIB_DIR + 'common'
-      require 'pp'
+    def self.go(options)
       user = User.new
       app_id = nil
-      if(args.length > 0)
-        app_id = args[0]
+      if(options["app"] && options["app"].length > 0)
+        app_id = options["app"]
       else
         app_id = KRL_COMMON::get_app().application_id rescue nil
       end
-      raise "Unable to determine the application id. use 'krl help' for more information." unless app_id
+      raise "Unable to determine the application id. Use 'krl help info' for more information." unless app_id
       
       app_info = user.api.get_app_info(app_id)
       app_details = user.api.get_app_details(app_id)
