@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'rubygems'
-require 'bundler/setup'
 require 'thor'
+require 'kynetx_am_api'
 require 'ap'
 
 #$DEBUG = true

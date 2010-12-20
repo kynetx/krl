@@ -2,11 +2,11 @@ require 'rake'
 
 Gem::Specification.new do |s|
   s.name = %q{krl}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Farmer, Cid Dennis"]
-  s.date = %q{2010-12-17}
+  s.date = %q{2010-12-20}
   s.email = %q{mjf@kynetx.com}
   s.extra_rdoc_files = ["LICENSE"]
   s.homepage = %q{http://github.com/kynetx/krl}
