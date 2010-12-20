@@ -1,5 +1,6 @@
 require 'terminal-table/import'
 require 'net/http'
+require 'yaml'
 
 module KRL_COMMON
   def self.pretty_table(collection, fields, limit=0, limit_last=false)

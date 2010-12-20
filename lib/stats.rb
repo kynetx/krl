@@ -26,7 +26,7 @@ module KRL_CMD
       rescue => e
         ap e.message if $DEBUG
         ap e.backtrace if $DEBUG
-        raise "Unable to retrieve the stats."
+        raise e.message
       end
       
     end
@@ -39,7 +39,7 @@ module KRL_CMD
       rescue => e
         ap e.message if $DEBUG
         ap e.backtrace if $DEBUG
-        raise "Unable to retrieve the stats."
+        raise e.message
       end 
     end
 
@@ -51,7 +51,7 @@ module KRL_CMD
       rescue => e
         ap e.message if $DEBUG
         ap e.backtrace if $DEBUG
-        raise "Unable to retrieve logging."
+        raise e.message
       end 
     end
 
