@@ -5,10 +5,9 @@ module KRL_CMD
       user = KRL_CMD::User.new
       new_app = user.create_application(name, desc)
       checkout_opts = {
-        "ruleset" => new_app.application_id,
         "title" => options["title"]
       }
-      KRL_CMD::Checkout.go(checkout_opts)
+      KRL_CMD::Checkout.go(new_app.application_id, checkout_opts)
       
     end
   end
