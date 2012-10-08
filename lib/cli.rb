@@ -2,9 +2,9 @@ module KRL_CMD
   LIB_DIR = File.dirname(__FILE__) + "/../lib/"
   %w(user apps checkout create update versions deploy
      commit show note check generate test info stats).each do |cmd|
-    autoload cmd.capitalize.to_sym, LIB_DIR + cmd
+    require LIB_DIR + cmd
   end
-  autoload :KRL_COMMON, LIB_DIR + 'common'
+  require LIB_DIR + 'common'
   
 
   class CLI < Thor
