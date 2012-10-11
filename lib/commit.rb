@@ -14,7 +14,7 @@ module KRL_CMD
         rescue KRLParseError => e
           puts "Unable to parse your krl."
           puts "Errors:"
-          puts e.parse_errors.join("\n")
+          puts e.parse_errors
         end
       else
         raise "Unable to find file: #{krl_file}"
