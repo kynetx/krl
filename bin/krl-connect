@@ -9,7 +9,7 @@ require "launchy"
 #TODO: add launchy gem to make the browser automatically popup.
 #TODO: make it so you can connect without a web page
 
-CONFIG_FILE = ENV["HOME"] + "/.krl/credentials.yml"
+CONFIG_FILE = ENV["HOME"] + "/.krl/credentials_dev.yml"
 class KRLConnect < Sinatra::Base
   set :environment, :production
   set :sessions, :false
@@ -51,8 +51,8 @@ class KRLConnect < Sinatra::Base
   end
 
   def setup_api(opts={})
-    KynetxAmApi::Oauth.api_server_url = "http://apps.kynetx.com"
-    KynetxAmApi::Oauth.accounts_server_url = "https://apps.kynetx.com"
+    KynetxAmApi::Oauth.api_server_url = "http://localhost:3000"
+    KynetxAmApi::Oauth.accounts_server_url = "http://localhost:3000"
     KynetxAmApi::Oauth.consumer_key = "1j54YDLUcLW9ERBKalNm"
     KynetxAmApi::Oauth.consumer_secret = "QiWCbvTpCAejoceV3f6dD8ycifEkSumFAW1VSmwC"
     return KynetxAmApi::DirectApi.new(opts)
