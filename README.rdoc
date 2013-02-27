@@ -58,6 +58,11 @@ From a command line type:
 Windows users can leave off the "sudo"
 
 == Authenticating
+Create an account at http://apps.kynetx.com/apps
+
+
+Once you've created an app, go ahead and authorize the KRL gem via OAuth.
+
 From a command line type:
   krl-connect
 
