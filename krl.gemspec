@@ -2,7 +2,7 @@ require 'rake'
 
 Gem::Specification.new do |s|
   s.name = %q{krl}
-  s.version = "0.3.8.dev"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Farmer, Cid Dennis","Jessie Morris"]
@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<kynetx_am_api>, [">= 0.1.30"])
+      s.add_runtime_dependency(%q<kynetx_am_api>, [">= 0.2.30"])
       s.add_runtime_dependency(%q<terminal-table>, [">= 0"])
       s.add_runtime_dependency(%q<sinatra>, [">= 1.0"])
       s.add_runtime_dependency(%q<launchy>, [">= 0.3.7"])
